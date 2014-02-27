@@ -48,8 +48,9 @@ var EnofjsGenerator = (function EnofjsGeneratorScope() {
         this.mkdir('app/templates');
 
         this.copy('_package.json', 'package.json');
-        if(this.frontend) this.template('_bowerFE', 'bower.json');
+        if (this.frontend) this.template('_bowerFE', 'bower.json');
         else this.template('_bowerBE', 'bower.json');
+        this.copy('bowerrc', '.bowerrc');
     };
 
     EnofjsGenerator.prototype.projectfiles = function projectfiles() {
