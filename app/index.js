@@ -48,7 +48,8 @@ var EnofjsGenerator = (function EnofjsGeneratorScope() {
         this.mkdir('app/templates');
 
         this.copy('_package.json', 'package.json');
-        this.copy('_bower.json', 'bower.json');
+        if(this.frontend) this.template('_bowerFE', 'bower.json');
+        else this.template('_bowerBE', 'bower.json');
     };
 
     EnofjsGenerator.prototype.projectfiles = function projectfiles() {
@@ -57,12 +58,12 @@ var EnofjsGenerator = (function EnofjsGeneratorScope() {
         this.copy('_gitignore', '.gitignore');
         if (this.frontend) {
             this.template('_GruntfileE2E', 'Gruntfile.js');
-            this.copy('_karma-conf-angular', 'test/karma-conf.js');
-            this.copy('_karma-conf-e2e', 'test/karma-conf-e2e.js');
+            this.copy('_karma-conf-angular', 'test/karma.conf.js');
+            this.copy('_karma-conf-e2e', 'test/e2e-karma.conf.js');
             this.template('_index', 'app/index.html');
         } else {
             this.template('_Gruntfile', 'Gruntfile.js');
-            this.copy('_karma-conf', 'test/karma-conf.js');
+            this.copy('_karma-conf', 'test/karma.conf.js');
         }
     };
 }());
